@@ -136,6 +136,6 @@ Disallow: /ObituariesHelper/PurchaseWallProduct
     
 
 
-Sitemap: https://alexisnimble.github.io/sitemap.xml.gz
+Sitemap: https://alexisnimble.github.io/sitemap-1.xml.gz
 
 
