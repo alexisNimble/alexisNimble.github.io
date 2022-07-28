@@ -136,6 +136,6 @@ Disallow: /ObituariesHelper/PurchaseWallProduct
     
 
 
-Sitemap: https://www.modetzfuneralhomes.com/sitemap.xml
+Sitemap: https://alexisnimble.github.io/sitemap.xml.gz
 
 
