@@ -1,7 +1,0 @@
-
-
-# robots.txt for Umbraco
-Sitemap: https://alexisnimble.github.io/sitemap-1.xml.gz
-Sitemap: https://alexisnimble.github.io/sitemap-2.xml.gz
-Sitemap: https://alexisnimble.github.io/sitemap-3.xml.gz
-Sitemap: https://alexisnimble.github.io/sitemap-4.xml.gz
