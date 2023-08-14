@@ -37,10 +37,38 @@
         });
     </script>
     <script>
-        window.dataLayer.push({"siteInfo":{"customerID":"SKV-482","websiteType":"Funeral Home","brandName":"CFS","version":"Responsive","siteId":"482","pageType":"home-page","currency":"CAD","fhName":"Sneath-Strilchuk Funeral Services","codebase":"CFS"}});
+        window.dataLayer.push(
+            {"siteInfo":
+                {"customerID":"SKV-482",
+                "websiteType":"Funeral Home",
+                "brandName":"CFS","version":
+                "Responsive",
+                "siteId":"482",
+                "pageType":"home-page",
+                "currency":"CAD",
+                "fhName":"Sneath-Strilchuk Funeral Services",
+                "codebase":"CFS"}});
     </script>
         <h1>Data Layer</h1>
-        <p>Test
-        </p>
+        <p>Test</p>
+        
+        <button onclick="myFunction()">Click me</button>
+        <p id="demo"></p>
+        
+        <script>
+        function myFunction() {
+            dataLayer.push({
+                'event': 'gaEvent',
+                'Event Category': "This is a E Category",
+                'Event Action': "This is an E action",
+                'Event Label': "This is an E Label",
+                'gaDimension1': 'Test'
+
+            });
+            document.getElementById("demo").innerHTML = "Hello World";
+
+        }
+        </script>
+        </script>
     </body>
 </html>
