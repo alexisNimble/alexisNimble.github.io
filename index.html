@@ -34,26 +34,9 @@
     <!-- End Google Tag Manager (noscript) -->
     <script>
         window.dataLayer.push({
-            "abTestInfo": {
-                "serverId": 22,
-                "testName": "PLPR",
-                "storeTemplateVersion": "CFS_ObitStore|CFS_ObitStore_PLPR_4|C1",
-                "templateId": ""
-            }
-        });
-    </script>
-    <script>
-        window.dataLayer.push({
             "siteInfo": {
-                "customerID": "SKV-482",
-                "websiteType": "Funeral Home",
-                "brandName": "CFS",
-                "version": "Responsive",
-                "siteId": "482",
                 "pageType": "home-page",
-                "currency": "CAD",
-                "fhName": "Sneath-Strilchuk Funeral Services",
-                "codebase": "CFS"
+                "brandName": "Nimble Gravity"
             }
         });
     </script>
@@ -67,10 +50,10 @@
         function myFunction() {
             dataLayer.push({
                 'event': 'gaEvent',
-                'Event Category': "This is a E Category",
-                'Event Action': "This is an E action",
-                'Event Label': "This is an E Label",
-                'gaDimension1': 'Test'
+                'Event Category': "Analytics Event",
+                'Event Action': "Event Click",
+                'Event Label': "This click was made from a dataLayer",
+                'gaDimension1': 'Extra Meta Data Fromm User'
 
             });
             document.getElementById("demo").innerHTML = "gaEvent API Query Test";
@@ -86,13 +69,11 @@
     
 <script>
     function fsFunction() {
-        FS.event('Subscribed', {
-            uid_str: '750948353',
-            plan_name_str: 'Professional',
-            plan_price_real: 299,
-            plan_users_int: 10,
-            days_in_trial_int: 42,
-            feature_packs: ['MAPS', 'DEV', 'DATA'],
+        FS.event('Click', {
+            uid_str: '007',
+            event_category: 'Full Story Event',
+            event_action: 'Event Click',
+            event_label: 'This click was made from Full Story',
         });
         document.getElementById("fsTest").innerHTML = "FS Event Test";
     }
