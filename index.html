@@ -43,7 +43,7 @@
     <h1>FULL STORY EVENTS</h1>
     <p>Test</p>
 
-    <button onclick="myFunction()">Click me</button>
+    <button onclick="myFunction()">Click to fire a DataLayer Custom Event</button>
     <p id="demo"></p>
 
     <script>
@@ -56,7 +56,7 @@
                 'gaDimension1': 'Extra Meta Data Fromm User'
 
             });
-            document.getElementById("demo").innerHTML = "gaEvent API Query Test";
+            document.getElementById("demo").innerHTML = "gaEvent sucess;
         }
     </script>
 </body>
@@ -64,7 +64,7 @@
 </html>
 </script>
 
-<button onclick = "fsFunction()" >Click FS Event </button>
+<button onclick = "fsFunction()" >Click to fire a Fullstory Custom Event </button>
     <p id="fsTest"></p>
     
 <script>
@@ -75,7 +75,7 @@
             event_action: 'Event Click',
             event_label: 'This click was made from Full Story',
         });
-        document.getElementById("fsTest").innerHTML = "FS Event Test";
+        document.getElementById("fsTest").innerHTML = "fsEvent sucess";
     }
 </script>
 </body>
