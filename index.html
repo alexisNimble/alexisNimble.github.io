@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-     <script>
+    <!-- Initial DataLayer Configuration -->
+    <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-YJ8REY8VPG');
+        window.dataLayer.push({
+            'global_user_role': 'administrator'
+        });
     </script>
-    
+
     <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
@@ -28,6 +29,13 @@
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJ8REY8VPG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-YJ8REY8VPG');
+    </script>
+
     <title>Test de Dimensiones Personalizadas</title>
     <style>
         body {
@@ -127,11 +135,6 @@
     </div>
 
     <script>
-        // Initial dataLayer push with global user role
-        window.dataLayer.push({
-            'global_user_role': 'administrator'
-        });
-
         function logEvent(eventDetails) {
             const logDiv = document.getElementById('eventLog');
             const logEntry = document.createElement('div');
