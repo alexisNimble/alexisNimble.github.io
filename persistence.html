@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Initial DataLayer Configuration -->
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        // Empujamos el user_role antes de cualquier otra cosa
+        dataLayer.push({
+            'user_role': 'default',
+            'event': 'user_role_set'
+        });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5HNTJGHR');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D6Y04V93B2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-D6Y04V93B2');
+    </script>
+
+    <title>Página 2 - Test de Persistencia</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            margin-bottom: 20px;
+        }
+
+        .nav-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .primary { 
+            background-color: #007bff; 
+            color: white; 
+        }
+
+        .event-log {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #e9ecef;
+        }
+
+        .log-entry {
+            margin: 5px 0;
+            font-family: monospace;
+            padding: 8px;
+            background-color: #ffffff;
+            border-radius: 4px;
+            border: 1px solid #e9ecef;
+            font-size: 14px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HNTJGHR" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="container">
+        <div class="nav-links">
+            <a href="index.html">← Volver a la página principal</a>
+        </div>
+
+        <h1>Test de Persistencia de User Properties</h1>
+        
+        <div class="button-group">
+            <button onclick="sendCustomEvent('page2_test_event')" class="primary">
+                Enviar Evento de Prueba
+            </button>
+        </div>
+
+        <div class="event-log">
+            <h3>Registro de Eventos:</h3>
+            <div id="eventLog"></div>
+        </div>
+    </div>
+
+    <script>
+        // Función para registrar eventos en la UI
+        function logEvent(eventDetails) {
+            const logDiv = document.getElementById('eventLog');
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.textContent = `${new Date().toLocaleTimeString()}: ${JSON.stringify(eventDetails)}`;
+            logDiv.insertBefore(logEntry, logDiv.firstChild);
+        }
+
+        // Función para enviar eventos
+        function sendCustomEvent(eventName) {
+            const eventParams = {
+                event_category: 'user_interaction',
+                event_label: eventName
+            };
+
+            // Enviar al dataLayer
+            dataLayer.push({
+                'event': eventName,
+                ...eventParams
+            });
+
+            // Enviar a GA4
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, eventParams);
+            }
+
+            // Registrar en la UI
+            logEvent({
+                event: eventName,
+                ...eventParams
+            });
+        }
+
+        // Al cargar la página, registramos un evento para ver el user_role actual
+        document.addEventListener('DOMContentLoaded', () => {
+            logEvent({
+                event: 'page_loaded',
+                message: 'Verificando persistencia de user_role'
+            });
+        });
+    </script>
+</body>
+</html>
