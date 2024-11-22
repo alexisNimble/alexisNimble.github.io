@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Initial DataLayer Configuration -->
+    <!-- Initial DataLayer and User Properties Configuration -->
     <script>
+        // Inicializar dataLayer antes que todo
         window.dataLayer = window.dataLayer || [];
         
-        // Función para configurar el user_role inicial
-        function initializeUserProperties() {
+        // Configurar user properties inmediatamente
+        window.dataLayer.push({
+            'user_properties': {
+                'user_role': 'default'
+            },
+            'event': 'user_properties_set'
+        });
+
+        // Función para configurar gtag cuando esté disponible
+        function initializeGtag() {
             if (typeof gtag === 'function') {
                 gtag('set', 'user_properties', {
                     user_role: 'default'
                 });
-                console.log('User properties initialized with default');
-            } else {
-                setTimeout(initializeUserProperties, 100);
+                console.log('Gtag user properties initialized with default');
             }
         }
-
-        // Iniciar el proceso de inicialización
-        initializeUserProperties();
     </script>
 
     <!-- Google Tag Manager -->
@@ -46,16 +50,10 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-D6Y04V93B2');
+        // Intentar configurar user properties después de la configuración de GA4
+        initializeGtag();
     </script>
 
-<div class="container">
-    <div class="nav-links">
-        <a href="persistence.html">Ir a página de prueba de persistencia →</a>
-    </div>
-
-    <h1>Test de User Properties en GA4</h1>
-    <!-- resto del contenido... -->
-</div>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -66,18 +64,18 @@
         }
 
         .nav-links {
-    margin-bottom: 20px;
-}
+            margin-bottom: 20px;
+        }
 
-.nav-links a {
-    color: #007bff;
-    text-decoration: none;
-    margin-right: 15px;
-}
+        .nav-links a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 15px;
+        }
 
-.nav-links a:hover {
-    text-decoration: underline;
-}
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
         
         .container {
             background-color: white;
@@ -176,7 +174,12 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container">
-     
+        <div class="nav-links">
+            <a href="persistence.html">Ir a página de prueba de persistencia →</a>
+        </div>
+
+        <h1>Test de User Properties en GA4</h1>
+
         <div class="button-group">
             <button onclick="sendCustomEvent('test_event_1')" class="primary">
                 Evento de Prueba 1
@@ -204,10 +207,6 @@
             const checkGtag = () => {
                 attempts++;
                 if (typeof gtag === 'function') {
-                    // Configurar user properties con 'default'
-                    gtag('set', 'user_properties', {
-                        user_role: 'default'
-                    });
                     callback();
                 } else if (attempts < maxAttempts) {
                     setTimeout(checkGtag, 500);
@@ -234,13 +233,13 @@
                 event_label: eventName
             };
 
-            // Primero, enviar al dataLayer
+            // Enviar al dataLayer
             dataLayer.push({
                 'event': eventName,
                 ...eventParams
             });
 
-            // Luego, intentar enviar a GA4 directamente si está disponible
+            // Enviar a GA4 si está disponible
             if (typeof gtag === 'function') {
                 gtag('event', eventName, eventParams);
             }
@@ -263,7 +262,9 @@
             // Actualizar en dataLayer
             dataLayer.push({
                 'event': 'user_role_updated',
-                'user_role': currentRole
+                'user_properties': {
+                    'user_role': currentRole
+                }
             });
 
             // Actualizar en GA4 si está disponible
