@@ -2,10 +2,6 @@
 <html lang="es">
 <head>
     <!-- Google Tag Manager -->
-  <!DOCTYPE html>
-<html lang="es">
-<head>
-    <!-- Google Tag Manager -->
     <script>
         (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -21,169 +17,6 @@
             f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-5HNTJGHR');
     </script>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HNTJGHR"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-YJ8REY8VPG');
-    </script>
-
-    <title>Test de Dimensiones Personalizadas</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .button-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-
-        .primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        .event-log {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-            height: 200px;
-            overflow-y: auto;
-        }
-
-        .log-entry {
-            margin: 5px 0;
-            font-family: monospace;
-        }
-    </style>
-</head>
-<body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HNTJGHR" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <div class="container">
-        <h1>Test de Dimensiones Personalizadas en GA4</h1>
-        
-        <div class="button-group">
-            <button onclick="eventWithUserRole()" class="primary">
-                Evento con Dimensión user-role
-            </button>
-            
-            <button onclick="simpleEvent1()" class="secondary">
-                Evento Simple 1
-            </button>
-            
-            <button onclick="simpleEvent2()" class="success">
-                Evento Simple 2
-            </button>
-        </div>
-
-        <div class="event-log">
-            <h3>Registro de Eventos:</h3>
-            <div id="eventLog"></div>
-        </div>
-    </div>
-
-    <script>
-        // Push initial dataLayer with global user role
-        window.dataLayer.push({
-            'global-user-role': 'admin-role'
-        });
-
-        function logEvent(eventDetails) {
-            const logDiv = document.getElementById('eventLog');
-            const logEntry = document.createElement('div');
-            logEntry.className = 'log-entry';
-            logEntry.textContent = `${new Date().toLocaleTimeString()}: ${JSON.stringify(eventDetails)}`;
-            logDiv.insertBefore(logEntry, logDiv.firstChild);
-        }
-
-        function eventWithUserRole() {
-            const eventDetails = {
-                'event': 'button_click',
-                'event_category': 'user_interaction',
-                'event_action': 'click',
-                'event_label': 'role_button',
-                'event-user-role': 'admin-role'
-            };
-            
-            dataLayer.push(eventDetails);
-            logEvent(eventDetails);
-        }
-
-        function simpleEvent1() {
-            const eventDetails = {
-                'event': 'button_click',
-                'event_category': 'user_interaction',
-                'event_action': 'click',
-                'event_label': 'simple_button_1'
-            };
-            
-            dataLayer.push(eventDetails);
-            logEvent(eventDetails);
-        }
-
-        function simpleEvent2() {
-            const eventDetails = {
-                'event': 'button_click',
-                'event_category': 'user_interaction',
-                'event_action': 'click',
-                'event_label': 'simple_button_2'
-            };
-            
-            dataLayer.push(eventDetails);
-            logEvent(eventDetails);
-        }
-    </script>
-</body>
-</html>
     <!-- End Google Tag Manager -->
 
     <!-- Google tag (gtag.js) -->
@@ -294,9 +127,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <script>
-        // Push initial dataLayer with global user role
+        // Initial dataLayer push with global user role
         window.dataLayer.push({
-            'global-user-role': 'admin-role'
+            'global_user_role': 'administrator'
         });
 
         function logEvent(eventDetails) {
@@ -313,7 +146,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 'event_category': 'user_interaction',
                 'event_action': 'click',
                 'event_label': 'role_button',
-                'event-user-role': 'admin-role'
+                'click_user_role': 'administrator'
             };
             
             dataLayer.push(eventDetails);
