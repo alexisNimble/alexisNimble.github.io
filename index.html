@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Initial DataLayer Configuration -->
+    <!-- Initial DataLayer Configuration with user_role -->
     <script>
         window.dataLayer = window.dataLayer || [];
+        // Empujamos el user_role antes de cualquier otra cosa
+        dataLayer.push({
+            'user_role': 'default',
+            'event': 'user_role_set'
+        });
     </script>
 
     <!-- Google Tag Manager -->
@@ -34,7 +39,7 @@
     </script>
 
     <title>Test de User Properties en GA4</title>
-   <style>
+    <style>
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
@@ -130,7 +135,6 @@
             box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.3);
         }
     </style>
-
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -170,9 +174,9 @@
             const checkGtag = () => {
                 attempts++;
                 if (typeof gtag === 'function') {
-                    // Configurar user properties una vez que gtag esté disponible
+                    // Configurar user properties con 'default'
                     gtag('set', 'user_properties', {
-                        user_role: 'administrator'
+                        user_role: 'default'
                     });
                     callback();
                 } else if (attempts < maxAttempts) {
@@ -220,10 +224,11 @@
 
         // Función para actualizar user properties
         function updateUserRole() {
-            const roles = ['administrator', 'editor', 'viewer'];
-            const currentRole = document.querySelector('.success').textContent.includes('administrator') ? 
+            const roles = ['default', 'administrator', 'editor', 'viewer'];
+            const currentRole = document.querySelector('.success').textContent.includes('default') ? 
+                'administrator' : document.querySelector('.success').textContent.includes('administrator') ? 
                 'editor' : document.querySelector('.success').textContent.includes('editor') ? 
-                'viewer' : 'administrator';
+                'viewer' : 'default';
 
             // Actualizar en dataLayer
             dataLayer.push({
@@ -252,7 +257,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             waitForGtag(() => {
                 console.log('GA4 inicializado correctamente');
-                document.querySelector('.success').textContent = 'Rol Actual: administrator';
+                document.querySelector('.success').textContent = 'Rol Actual: default';
             });
         });
     </script>
