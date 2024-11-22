@@ -4,9 +4,6 @@
     <!-- Initial DataLayer Configuration -->
     <script>
         window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'global_user_role': 'administrator'
-        });
     </script>
 
     <!-- Google Tag Manager -->
@@ -30,13 +27,13 @@
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-YJ8REY8VPG"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-YJ8REY8VPG');
+        // Configuración correcta de user properties
+        gtag('set', 'user_properties', {
+            user_role: 'administrator'  // Esta propiedad persistirá para futuros eventos
+        });
     </script>
 
-    <title>Test de Dimensiones Personalizadas</title>
+    <title>Test de User Properties en GA4</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,24 +66,10 @@
             transition: background-color 0.3s;
         }
 
-        .primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .secondary {
-            background-color: #6c757d;
-            color: white;
-        }
-
-        .success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
+        .primary { background-color: #007bff; color: white; }
+        .secondary { background-color: #6c757d; color: white; }
+        .success { background-color: #28a745; color: white; }
+        button:hover { opacity: 0.9; }
 
         .event-log {
             margin-top: 20px;
@@ -112,19 +95,19 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <div class="container">
-        <h1>Test de Dimensiones Personalizadas en GA4</h1>
+        <h1>Test de User Properties en GA4</h1>
         
         <div class="button-group">
-            <button onclick="eventWithUserRole()" class="primary">
-                Evento con Dimensión user-role
+            <button onclick="sendCustomEvent('test_event_1')" class="primary">
+                Evento de Prueba 1
             </button>
             
-            <button onclick="simpleEvent1()" class="secondary">
-                Evento Simple 1
+            <button onclick="sendCustomEvent('test_event_2')" class="secondary">
+                Evento de Prueba 2
             </button>
             
-            <button onclick="simpleEvent2()" class="success">
-                Evento Simple 2
+            <button onclick="updateUserRole()" class="success">
+                Actualizar Rol de Usuario
             </button>
         </div>
 
@@ -135,6 +118,7 @@
     </div>
 
     <script>
+        // Función para registrar eventos en la UI
         function logEvent(eventDetails) {
             const logDiv = document.getElementById('eventLog');
             const logEntry = document.createElement('div');
@@ -143,41 +127,43 @@
             logDiv.insertBefore(logEntry, logDiv.firstChild);
         }
 
-        function eventWithUserRole() {
-            const eventDetails = {
-                'event': 'button_click',
-                'event_category': 'user_interaction',
-                'event_action': 'click',
-                'event_label': 'role_button',
-                'click_user_role': 'administrator'
+        // Función para enviar eventos GA4
+        function sendCustomEvent(eventName) {
+            const eventParams = {
+                event_category: 'user_interaction',
+                event_label: eventName
             };
-            
-            dataLayer.push(eventDetails);
-            logEvent(eventDetails);
+
+            // Enviar evento a GA4 usando gtag
+            gtag('event', eventName, eventParams);
+
+            // Registrar en la UI
+            logEvent({
+                event: eventName,
+                ...eventParams
+            });
         }
 
-        function simpleEvent1() {
-            const eventDetails = {
-                'event': 'button_click_2',
-                'event_category': 'user_interaction',
-                'event_action': 'click',
-                'event_label': 'simple_button_1'
-            };
-            
-            dataLayer.push(eventDetails);
-            logEvent(eventDetails);
-        }
+        // Función para actualizar user properties
+        function updateUserRole() {
+            const roles = ['administrator', 'editor', 'viewer'];
+            const currentRole = document.querySelector('.success').textContent.includes('administrator') ? 
+                'editor' : document.querySelector('.success').textContent.includes('editor') ? 
+                'viewer' : 'administrator';
 
-        function simpleEvent2() {
-            const eventDetails = {
-                'event': 'button_click_2',
-                'event_category': 'user_interaction',
-                'event_action': 'click',
-                'event_label': 'simple_button_2'
-            };
-            
-            dataLayer.push(eventDetails);
-            logEvent(eventDetails);
+            // Actualizar user properties en GA4
+            gtag('set', 'user_properties', {
+                user_role: currentRole
+            });
+
+            // Actualizar texto del botón
+            document.querySelector('.success').textContent = `Rol Actual: ${currentRole}`;
+
+            // Registrar en la UI
+            logEvent({
+                event: 'user_role_updated',
+                new_role: currentRole
+            });
         }
     </script>
 </body>
