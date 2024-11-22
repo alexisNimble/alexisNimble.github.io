@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Initial DataLayer Configuration with user_role -->
+    <!-- Initial DataLayer Configuration -->
     <script>
         window.dataLayer = window.dataLayer || [];
-        // Empujamos el user_role antes de cualquier otra cosa
-        dataLayer.push({
-            'user_role': 'default',
-            'event': 'user_role_set'
-        });
+        
+        // Función para configurar el user_role inicial
+        function initializeUserProperties() {
+            if (typeof gtag === 'function') {
+                gtag('set', 'user_properties', {
+                    user_role: 'default'
+                });
+                console.log('User properties initialized with default');
+            } else {
+                setTimeout(initializeUserProperties, 100);
+            }
+        }
+
+        // Iniciar el proceso de inicialización
+        initializeUserProperties();
     </script>
 
     <!-- Google Tag Manager -->
@@ -37,6 +47,7 @@
         gtag('js', new Date());
         gtag('config', 'G-D6Y04V93B2');
     </script>
+
 <div class="container">
     <div class="nav-links">
         <a href="persistence.html">Ir a página de prueba de persistencia →</a>
